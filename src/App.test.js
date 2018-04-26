@@ -5,7 +5,9 @@ import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 
-import createTestClient, { createGraphQLPromise } from './test/util';
+import createTestClient, {
+  createApolloExpectedPromise,
+} from './test/util';
 import { MOCK_VIEWER_WITH_REPOSITORIES } from './test/mocks';
 
 import App, { GET_REPOSITORIES_OF_VIEWER } from './App';
@@ -14,7 +16,9 @@ let client;
 let promise;
 
 beforeAll(() => {
-  promise = createGraphQLPromise(MOCK_VIEWER_WITH_REPOSITORIES);
+  promise = createApolloExpectedPromise(
+    MOCK_VIEWER_WITH_REPOSITORIES,
+  );
 
   sinon
     .stub(global, 'fetch')

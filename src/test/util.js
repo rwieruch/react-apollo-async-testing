@@ -24,7 +24,7 @@ const createTestClient = () => {
   });
 };
 
-export const createGraphQLPromise = data => {
+export const createApolloExpectedPromise = data => {
   return Promise.resolve({
     text: () => Promise.resolve(JSON.stringify(data)),
   });
