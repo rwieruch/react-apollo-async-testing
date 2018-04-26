@@ -25,8 +25,6 @@ export const GET_REPOSITORIES_OF_VIEWER = gql`
 const App = () => (
   <Query query={GET_REPOSITORIES_OF_VIEWER}>
     {({ data, loading, error }) => {
-      console.log(data);
-
       const { viewer } = data;
 
       if (loading) {

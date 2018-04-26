@@ -41,11 +41,12 @@ test('it makes use of the Query render prop', done => {
 
   expect(wrapper.find('[data-test-id="loading"]')).toHaveLength(1);
   promise.then().then(() => {
-    // Without setTimeout it still shows the
+    // Without setImmediate it still shows the
     // loading indicator [data-test-id="loading"]
     // even though the query result's data comes in
-    // the render props function
-    setTimeout(() => {
+    // the render props function. Dealing with these race conditions
+    // feels kinda hacky.
+    setImmediate(() => {
       wrapper.update();
 
       expect(wrapper.find('[data-test-id="profile"]')).toHaveLength(
