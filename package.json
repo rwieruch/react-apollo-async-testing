@@ -22,7 +22,6 @@
   "devDependencies": {
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "graphql-tools": "^2.24.0",
     "sinon": "^4.5.0"
   }
 }

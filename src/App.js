@@ -2,16 +2,19 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
+import Repository from './Repository';
+
 export const GET_REPOSITORIES_OF_VIEWER = gql`
   {
     viewer {
       name
-      repositories(last: 5) {
+      repositories(last: 25) {
         edges {
           node {
             id
             name
             url
+            viewerSubscription
           }
         }
       }
@@ -41,21 +44,17 @@ const App = () => (
       return (
         <div>
           <div data-test-id="profile">{viewer.name}</div>
-          <Repositories repositories={viewer.repositories} />
+          <ul>
+            {viewer.repositories.edges.map(({ node }) => (
+              <li key={node.id}>
+                <Repository repository={node} />
+              </li>
+            ))}
+          </ul>
         </div>
       );
     }}
   </Query>
-);
-
-export const Repositories = ({ repositories }) => (
-  <ul>
-    {repositories.edges.map(({ node }) => (
-      <li key={node.id}>
-        <a href={node.url}>{node.name}</a>
-      </li>
-    ))}
-  </ul>
 );
 
 export default App;
