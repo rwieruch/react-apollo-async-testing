@@ -2,11 +2,11 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
-const GET_REPOSITORIES_OF_VIEWER = gql`
+export const GET_REPOSITORIES_OF_VIEWER = gql`
   {
     viewer {
       name
-      repositories(first: 5) {
+      repositories(last: 5) {
         edges {
           node {
             id
@@ -22,23 +22,25 @@ const GET_REPOSITORIES_OF_VIEWER = gql`
 const App = () => (
   <Query query={GET_REPOSITORIES_OF_VIEWER}>
     {({ data, loading, error }) => {
+      console.log(data);
+
       const { viewer } = data;
 
       if (loading) {
-        return <div>Loading ...</div>;
+        return <div data-test-id="loading">Loading ...</div>;
       }
 
       if (error) {
-        return <div>Error ...</div>;
+        return <div data-test-id="error">Error ...</div>;
       }
 
       if (!viewer) {
-        return <div>No data ...</div>;
+        return <div data-test-id="no-data">No data ...</div>;
       }
 
       return (
         <div>
-          <div className="profile">{viewer.name}</div>
+          <div data-test-id="profile">{viewer.name}</div>
           <Repositories repositories={viewer.repositories} />
         </div>
       );
