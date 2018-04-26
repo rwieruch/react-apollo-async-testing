@@ -3,29 +3,51 @@ import ReactDOM from 'react-dom';
 
 import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
-import sinon from 'sinon';
 
-import createTestClient, {
-  createApolloExpectedPromise,
-} from './test/util';
-import { MOCK_VIEWER_WITH_REPOSITORIES } from './test/mocks';
+import './test/setup';
+import { createApolloClient, stubQueryWith } from './test/lib';
 
 import App, { GET_REPOSITORIES_OF_VIEWER } from './App';
 
 let client;
 let promise;
 
+const viewerWithRepositories = {
+  viewer: {
+    name: 'Robin Wieruch',
+    repositories: {
+      edges: [
+        {
+          node: {
+            id: '1',
+            name: 'bar',
+            url: 'https://bar.com',
+            viewerSubscription: 'UNSUBSCRIBED',
+          },
+        },
+        {
+          node: {
+            id: '2',
+            name: 'qwe',
+            url: 'https://qwe.com',
+            viewerSubscription: 'UNSUBSCRIBED',
+          },
+        },
+      ],
+    },
+  },
+};
+
 beforeAll(() => {
-  promise = createApolloExpectedPromise(
-    MOCK_VIEWER_WITH_REPOSITORIES,
+  promise = stubQueryWith(
+    'https://api.github.com/graphql',
+    {
+      query: GET_REPOSITORIES_OF_VIEWER,
+    },
+    viewerWithRepositories,
   );
 
-  sinon
-    .stub(global, 'fetch')
-    .withArgs('https://api.github.com/graphql')
-    .returns(promise);
-
-  client = createTestClient();
+  client = createApolloClient('https://api.github.com/graphql');
 });
 
 afterAll(() => {
@@ -40,6 +62,7 @@ test('it makes use of the Query render prop', done => {
   );
 
   expect(wrapper.find('[data-test-id="loading"]')).toHaveLength(1);
+
   promise.then().then(() => {
     // Without setImmediate it still shows the
     // loading indicator [data-test-id="loading"]
@@ -51,6 +74,9 @@ test('it makes use of the Query render prop', done => {
 
       expect(wrapper.find('[data-test-id="profile"]')).toHaveLength(
         1,
+      );
+      expect(wrapper.find('[data-test-id="profile"]').text()).toEqual(
+        viewerWithRepositories.viewer.name,
       );
 
       done();

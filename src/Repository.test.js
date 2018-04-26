@@ -3,41 +3,46 @@ import ReactDOM from 'react-dom';
 
 import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
-import sinon from 'sinon';
 
-import createTestClient, { mockMutationComponent } from './test/util';
-import { MOCK_REPOSITORY } from './test/mocks';
+import './test/setup';
+import { createApolloClient, injectSpyInMutation } from './test/lib';
 
 import Repository, { WATCH_REPOSITORY, isWatch } from './Repository';
 
 let client;
-let mutationSpy;
+let sinonSpy;
 
 beforeAll(() => {
-  client = createTestClient();
+  sinonSpy = injectSpyInMutation();
 
-  mutationSpy = sinon.spy();
-  mockMutationComponent(mutationSpy);
+  client = createApolloClient('https://api.github.com/graphql');
 });
 
 test('it makes use of the Mutation render prop', () => {
+  const repository = {
+    id: '1',
+    name: 'foo',
+    url: 'https://foo.com',
+    viewerSubscription: 'UNSUBSCRIBED',
+  };
+
   const wrapper = mount(
     <ApolloProvider client={client}>
-      <Repository repository={MOCK_REPOSITORY} />
+      <Repository repository={repository} />
     </ApolloProvider>,
   );
 
   wrapper.find('button').simulate('click');
 
-  expect(mutationSpy.calledOnce).toEqual(true);
+  expect(sinonSpy.calledOnce).toEqual(true);
 
   const expectedObject = {
     mutation: WATCH_REPOSITORY,
     variables: {
-      id: MOCK_REPOSITORY.id,
+      id: repository.id,
       viewerSubscription: 'SUBSCRIBED',
     },
   };
 
-  expect(mutationSpy.calledWith(expectedObject)).toEqual(true);
+  expect(sinonSpy.calledWith(expectedObject)).toEqual(true);
 });
