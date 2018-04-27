@@ -1,0 +1,59 @@
+{
+  "name": "react-apollo-async-testing",
+  "version": "0.0.1",
+  "description": "A lightweight way to test your Mutation and Query components in React Apollo (react-apollo).",
+  "main": "lib/index.js",
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-apollo": "^2.1.0",
+    "apollo-cache-inmemory": "^1.1.0",
+    "apollo-client": "^2.2.0",
+    "apollo-link-http": "^1.5.0",
+    "graphql": "^0.13.0",
+    "graphql-tag": "^2.9.0"
+  },
+  "dependencies": {
+    "sinon": "^4.5.0"
+  },
+  "devDependencies": {
+    "apollo-cache-inmemory": "^1.1.12",
+    "apollo-client": "^2.2.8",
+    "apollo-link-http": "^1.5.4",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.1",
+    "react": "^16.3.2",
+    "react-apollo": "^2.1.3",
+    "react-dom": "^16.3.2"
+  },
+  "scripts": {
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rwieruch/react-apollo-testing.git"
+  },
+  "keywords": [
+    "react-apollo-testing",
+    "react-mutation-test",
+    "react-query-test"
+  ],
+  "author": "“Robin <“wrobin@gmx.net”> (https://www.robinwieruch.de)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rwieruch/react-apollo-testing/issues"
+  },
+  "homepage": "https://github.com/rwieruch/react-apollo-testing#readme",
+  "tags": [
+    "react",
+    "react-apollo",
+    "testing"
+  ]
+}
