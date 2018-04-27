@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { ApolloProvider } from 'react-apollo';
+
 import { mount } from 'enzyme';
 import {
   createApolloClient,
@@ -54,10 +54,12 @@ beforeAll(() => {
 });
 
 afterAll(() => {
+  // since the fetch API is stubbed with the library
+  // it has to be restored after the tests
   fetch.restore();
 });
 
-test('it makes use of the Query render prop', done => {
+test('query result of Query component', done => {
   const wrapper = mount(
     <ApolloProvider client={client}>
       <App />

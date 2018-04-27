@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { ApolloProvider } from 'react-apollo';
+
 import { mount } from 'enzyme';
 import {
   createApolloClient,
@@ -21,7 +21,7 @@ beforeAll(() => {
   client = createApolloClient('https://api.github.com/graphql');
 });
 
-test('it makes use of the Mutation render prop', () => {
+test('interaction with mutation function from the Mutation component', () => {
   const repository = {
     id: '1',
     name: 'foo',
