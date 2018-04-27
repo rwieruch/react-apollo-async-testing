@@ -1,12 +1,12 @@
 # react-apollo-async-testing
 
-A lightweight way to test your Mutation and Query components in React Apollo ([react-apollo](https://github.com/apollographql/react-apollo)).
+**Beta:** A lightweight way to test your Mutation and Query components in React Apollo ([react-apollo](https://github.com/apollographql/react-apollo)).
 
 ## Install & Usage
 
 On the command line:
 
-`npm install react-apollo-async-testing`
+`npm install --save-dev react-apollo-async-testing`
 
 In your application:
 

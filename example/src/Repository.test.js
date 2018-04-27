@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 
 import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
+import {
+  createApolloClient,
+  injectSpyInMutation,
+} from 'react-apollo-async-testing';
 
 import './test/setup';
-import { createApolloClient, injectSpyInMutation } from './test/lib';
 
 import Repository, { WATCH_REPOSITORY, isWatch } from './Repository';
 

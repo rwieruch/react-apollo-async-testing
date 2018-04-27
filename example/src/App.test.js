@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 
 import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
+import {
+  createApolloClient,
+  stubQueryWith,
+} from 'react-apollo-async-testing';
 
 import './test/setup';
-import { createApolloClient, stubQueryWith } from './test/lib';
 
 import App, { GET_REPOSITORIES_OF_VIEWER } from './App';
 
