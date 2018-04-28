@@ -1,6 +1,6 @@
 {
   "name": "react-apollo-async-testing",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A lightweight way to test your Mutation and Query components in React Apollo (react-apollo).",
   "main": "lib/index.js",
   "peerDependencies": {

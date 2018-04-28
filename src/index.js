@@ -44,11 +44,11 @@ export const stubQueryWith = (uri, payload, result) => {
   return promise;
 };
 
-export const injectSpyInMutation = () => {
+export const injectSpyInMutation = (result = {}) => {
   const spy = sinon.spy();
 
   ReactApollo.Mutation = ({ mutation, variables, children }) => (
-    <div>{children(() => spy({ mutation, variables }))}</div>
+    <div>{children(() => spy({ mutation, variables }), result)}</div>
   );
 
   jest.setMock('react-apollo', ReactApollo);
