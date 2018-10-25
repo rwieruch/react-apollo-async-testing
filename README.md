@@ -1,5 +1,7 @@
 # react-apollo-async-testing
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/rwieruch/react-apollo-async-testing.svg)](https://greenkeeper.io/)
+
 **Beta:** A lightweight way to test your Mutation and Query components in React Apollo ([react-apollo](https://github.com/apollographql/react-apollo)).
 
 ## Install & Usage
